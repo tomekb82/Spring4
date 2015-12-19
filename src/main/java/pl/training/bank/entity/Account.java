@@ -1,5 +1,6 @@
 package pl.training.bank.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,7 +11,15 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.Proxy;
 
+ @Proxy(lazy = false)
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement
 @NamedQuery(name = Account.GET_BY_NUMBER, query = "select a from Account a where a.number = :number")
 @Table(name = "accounts")
 @Entity
@@ -25,6 +34,7 @@ public class Account implements Serializable {
     @Column(unique = true)
     private String number;
     private long balance;
+    @XmlTransient
     @ManyToMany
     private List<Customer> owners;
 
@@ -73,6 +83,7 @@ public class Account implements Serializable {
         this.balance = balance;
     }
 
+    @JsonIgnore
     public List<Customer> getOwners() {
         return owners;
     }

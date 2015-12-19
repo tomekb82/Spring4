@@ -9,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlType;
 
 @Table(name = "addressess")
 @Entity
@@ -16,9 +17,11 @@ public class Address implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @XmlType(name = "addressType")
     public enum Type {
 
         HOME, WORK
+        
     }
 
     @GeneratedValue
