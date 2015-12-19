@@ -1,6 +1,8 @@
 package pl.training.bank.config;
 
 import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -16,18 +18,21 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 public class Security extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    DataSource dataSource;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        JndiDataSourceLookup dataSourceLookup = new JndiDataSourceLookup();
-        DataSource dataSource = dataSourceLookup.getDataSource("jdbc/bank");
+        //JndiDataSourceLookup dataSourceLookup = new JndiDataSourceLookup();
+        //DataSource dataSource = dataSourceLookup.getDataSource("jdbc/bank");
         
         auth.jdbcAuthentication()
                 .passwordEncoder(new Md5PasswordEncoder())
                 .dataSource(dataSource);
-//                .withDefaultSchema()
-//                .withUser("maria")
-//                .password("202cb962ac59075b964b07152d234b70")
-//                .roles("ADMIN");
+                //.withDefaultSchema()
+                //.withUser("maria")
+                //.password("202cb962ac59075b964b07152d234b70")
+                //.roles("ADMIN");
     }
 
     @Override
