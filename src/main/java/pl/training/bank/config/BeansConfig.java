@@ -1,6 +1,7 @@
 package pl.training.bank.config;
 
-import org.hibernate.SessionFactory;
+import javax.persistence.EntityManagerFactory;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -19,8 +20,8 @@ import pl.training.bank.service.repository.AccountsRepository;
 public class BeansConfig {
 
     @Bean
-    public AccountNumberGenerator accountNumberGenerator(SessionFactory sessionFactory) {
-        return new SequentialAccountNumberGenerator(sessionFactory);
+    public AccountNumberGenerator accountNumberGenerator(EntityManagerFactory entityManagerFactory) {
+        return new SequentialAccountNumberGenerator(entityManagerFactory);
     }
 
     @Bean
