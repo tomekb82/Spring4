@@ -15,6 +15,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Proxy;
 
  @Proxy(lazy = false)
@@ -31,6 +33,8 @@ public class Account implements Serializable {
     @GeneratedValue
     @Id
     private Long id;
+
+    @ApiModelProperty(notes = "Notatka do numeru konta", name = "Numer konta", required = true)
     @Column(unique = true)
     private String number;
     private long balance;
