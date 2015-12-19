@@ -8,7 +8,7 @@ import pl.training.bank.entity.Account;
 
 public class AccountsRepositoryImpl implements AccountsRepositoryCustom {
 
-    @PersistenceContext(unitName = "bank")
+    @PersistenceContext//(unitName = "bank")
     private EntityManager entityManager;
 
     public void setEntityManager(EntityManager entityManager) {
