@@ -10,7 +10,7 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import pl.training.bank.entity.Account;
 
-public class MySQLAccountsRepository implements AccountsRepository {
+public class MySQLAccountsRepository implements OldAccountsRepository {
 
     private static final String INSERT = "insert into account values(null,:number,:balance)";
     private static final String UPDATE = "update account set balance = :balance where id = :id";

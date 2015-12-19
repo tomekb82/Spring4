@@ -6,7 +6,7 @@ import javax.persistence.PersistenceContext;
 
 import pl.training.bank.entity.Account;
 
-public class JpaAccountsRepository implements AccountsRepository {
+public class JpaAccountsRepository implements OldAccountsRepository {
 
     @PersistenceContext(unitName = "bank")
     private EntityManager entityManager;
