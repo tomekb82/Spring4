@@ -2,7 +2,7 @@ package pl.training.bank.service;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.hibernate.SessionFactory;
+import javax.persistence.EntityManagerFactory;
 
 public class SequentialAccountNumberGenerator implements AccountNumberGenerator {
 
@@ -10,13 +10,14 @@ public class SequentialAccountNumberGenerator implements AccountNumberGenerator 
 
     private AtomicLong counter = new AtomicLong();
 
-    public SequentialAccountNumberGenerator(SessionFactory sessionFactory) {
-        restoreCounterState(sessionFactory);
+    public SequentialAccountNumberGenerator(EntityManagerFactory entityManagerFactory) {
+        restoreCounterState(entityManagerFactory);
     }
 
-    private void restoreCounterState(SessionFactory sessionFactory) {
-        String lastAccountNumber = (String) sessionFactory.openSession()
-                .createQuery(SELECT_LAST_ACCOUNT_NUMBER).uniqueResult();
+    private void restoreCounterState(EntityManagerFactory entityManagerFactory) {
+        String lastAccountNumber = entityManagerFactory.createEntityManager()
+                .createQuery(SELECT_LAST_ACCOUNT_NUMBER, String.class)
+                .getSingleResult();
         if (lastAccountNumber != null) {
             counter = new AtomicLong(Long.valueOf(lastAccountNumber));
         }

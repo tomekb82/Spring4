@@ -6,12 +6,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+@NamedQuery(name = Account.GET_BY_NUMBER, query = "select a from Account a where a.number = :number")
 @Table(name = "accounts")
 @Entity
 public class Account implements Serializable {
 
+    public static final String GET_BY_NUMBER = "getByNumber";
     private static final long serialVersionUID = 1L;
 
     @GeneratedValue
