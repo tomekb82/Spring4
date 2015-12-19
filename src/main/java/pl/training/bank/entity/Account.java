@@ -1,11 +1,13 @@
 package pl.training.bank.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -23,6 +25,8 @@ public class Account implements Serializable {
     @Column(unique = true)
     private String number;
     private long balance;
+    @ManyToMany
+    private List<Customer> owners;
 
     public Account() {
     }
@@ -69,12 +73,21 @@ public class Account implements Serializable {
         this.balance = balance;
     }
 
+    public List<Customer> getOwners() {
+        return owners;
+    }
+
+    public void setOwners(List<Customer> owners) {
+        this.owners = owners;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + (int) (balance ^ (balance >>> 32));
         result = prime * result + ((number == null) ? 0 : number.hashCode());
+        result = prime * result + ((owners == null) ? 0 : owners.hashCode());
         return result;
     }
 
@@ -100,13 +113,20 @@ public class Account implements Serializable {
         } else if (!number.equals(other.number)) {
             return false;
         }
+        if (owners == null) {
+            if (other.owners != null) {
+                return false;
+            }
+        } else if (!owners.equals(other.owners)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
         return "Account [id=" + id + ", number=" + number + ", balance="
-                + balance + "]";
+                + balance + ", owners=" + owners + "]";
     }
 
 }

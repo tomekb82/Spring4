@@ -5,6 +5,8 @@
 	<persistence-unit name="bank" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>pl.training.bank.entity.Account</class>
+		<class>pl.training.bank.entity.Customer</class>
+		<class>pl.training.bank.entity.Address</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bank" />
