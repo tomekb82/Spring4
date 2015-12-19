@@ -5,7 +5,7 @@ import java.util.Map;
 
 import pl.training.bank.entity.Account;
 
-public class HashMapAccountsRepository implements AccountsRepository {
+public class HashMapAccountsRepository implements OldAccountsRepository {
 
     private long counter;
     private Map<String, Account> accounts = new HashMap<>();

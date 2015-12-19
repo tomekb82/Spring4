@@ -5,7 +5,7 @@ import org.hibernate.SessionFactory;
 
 import pl.training.bank.entity.Account;
 
-public class HibernateAccountsRepository implements AccountsRepository {
+public class HibernateAccountsRepository implements OldAccountsRepository {
 
     private static final String SELECT_BY_NUMBER = "select a from Account a where a.number = :number";
 
