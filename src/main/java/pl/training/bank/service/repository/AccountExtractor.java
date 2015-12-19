@@ -26,3 +26,4 @@ public class AccountExtractor implements ResultSetExtractor<Account> {
     }
 
 }
+

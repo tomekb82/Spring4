@@ -14,7 +14,7 @@ import pl.training.bank.service.ConsoleOperationLogger;
 import pl.training.bank.service.SequentialAccountNumberGenerator;
 import pl.training.bank.service.repository.AccountsRepository;
 
-@Import(Persistence.class)
+@Import({Persistence.class, WebMvc.class, Security.class})
 @EnableAspectJAutoProxy
 @Configuration
 public class BeansConfig {

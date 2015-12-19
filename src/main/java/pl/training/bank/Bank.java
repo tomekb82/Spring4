@@ -1,6 +1,7 @@
 package pl.training.bank;
 
 import pl.training.bank.entity.Account;
+import pl.training.bank.entity.Operation;
 
 public interface Bank {
 
@@ -12,4 +13,6 @@ public interface Bank {
 
     void transferFundsBetweenAccounts(long funds, String sourceAccountNumber, String destinationAccountNumber);
 
+    void processOperation(Operation operation);
+    
 }

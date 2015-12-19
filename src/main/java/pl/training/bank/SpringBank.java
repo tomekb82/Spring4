@@ -1,12 +1,14 @@
 package pl.training.bank;
 
+import javax.jws.WebParam;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.training.bank.entity.Account;
+import pl.training.bank.entity.Operation;
 import pl.training.bank.service.AccountNumberGenerator;
 import pl.training.bank.service.repository.AccountsRepository;
 
-@Transactional()
+@Transactional
 public class SpringBank implements Bank {
 
     private AccountNumberGenerator accountNumberGenerator;
@@ -42,6 +44,20 @@ public class SpringBank implements Bank {
     public void transferFundsBetweenAccounts(long funds, String sourceAccountNumber, String destinationAccountNumber) {
         withdrawFundsFromAccount(funds, sourceAccountNumber);
         depositFundsIntoAccount(funds, destinationAccountNumber);
+    }
+
+    @Override
+    public void processOperation(@WebParam(targetNamespace = "http://operation") Operation operation) {
+        switch (operation.getType()) {
+            case DEPOSIT:
+                depositFundsIntoAccount(operation.getFunds(), operation.getAccountNumber());
+                break;
+            case WITHDRAW:
+                withdrawFundsFromAccount(operation.getFunds(), operation.getAccountNumber());
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
 }
