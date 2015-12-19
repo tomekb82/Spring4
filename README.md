@@ -6,8 +6,18 @@
 - uruchom
     ./startNetworkServer
 
+## Web Service Client
 
+- stworz w IDEA project Web Service Client
+
+
+
+
+------------------------------------------------
 #TODO
+
+- wyjasnic roznice
+
 
 -<persistence version="2.1"
 -       xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

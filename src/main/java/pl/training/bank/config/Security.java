@@ -38,12 +38,14 @@ public class Security extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-              .csrf().disable()
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/resources/**")
                     .permitAll()
                 .antMatchers("/BankService/**")
                     .permitAll()
+                .antMatchers("/rest/accounts**")
+                    .hasRole("ADMIN")
                 .anyRequest()
                     .authenticated()
                 .and()
