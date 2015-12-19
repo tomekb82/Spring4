@@ -16,6 +16,8 @@
 ------------------------------------------------
 #TODO
 
+- nie dziala wystawienie WS
+
 - wyjasnic roznice
 
 
