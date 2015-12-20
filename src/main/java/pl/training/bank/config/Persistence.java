@@ -3,6 +3,9 @@ package pl.training.bank.config;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -16,7 +19,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-@EnableJpaRepositories(basePackages = "pl.training.bank.service.repository")
+@EnableJpaRepositories(basePackages = {"pl.training.bank.service.repository",
+        "pl.training.bank.oauth.service.repository"})
 @EnableTransactionManagement
 @Configuration
 public class Persistence {
@@ -38,7 +42,8 @@ public class Persistence {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan(new String[] { "pl.training.bank.entity" });
+        em.setPackagesToScan(new String[] { "pl.training.bank.entity",
+                                            "pl.training.bank.oauth.model"});
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
@@ -62,7 +67,7 @@ public class Persistence {
 
     Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "update");
+        properties.setProperty("hibernate.hbm2ddl.auto", "create");
         properties.setProperty("hibernate.show_sql", "true");
         properties.setProperty("hibernate.format_sql", "true");
         return properties;
@@ -77,4 +82,16 @@ public class Persistence {
         basicDataSource.setPassword("sa");//${jdbc.password}");
         return basicDataSource;
     }
+
+
+    @Bean
+    public PropertySourcesPlaceholderConfigurer myPropertySourcesPlaceholderConfigurer() {
+        PropertySourcesPlaceholderConfigurer p = new PropertySourcesPlaceholderConfigurer();
+        Resource[] resourceLocations = new Resource[] {
+                new ClassPathResource("log4j.properties")
+        };
+        p.setLocations(resourceLocations);
+        return p;
+    }
+
 }

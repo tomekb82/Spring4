@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-package pl.training.bank.controller;
+package pl.training.bank.oauth.controller;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import pl.training.bank.entity.Greeting;
-import pl.training.bank.entity.User;
+import pl.training.bank.oauth.model.User;
 
 import java.util.concurrent.atomic.AtomicLong;
 

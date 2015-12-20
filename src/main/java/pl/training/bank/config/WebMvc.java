@@ -11,10 +11,10 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-
-@ComponentScan("pl.training.bank.controller")
-@EnableWebMvc
 @Configuration
+@EnableWebMvc
+@ComponentScan(basePackages = {"pl.training.bank.controller",
+        "pl.training.bank.oauth.controller"})
 public class WebMvc extends WebMvcConfigurerAdapter {
 
     @Override

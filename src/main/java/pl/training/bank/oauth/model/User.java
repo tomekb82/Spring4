@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package pl.training.bank.entity;
+package pl.training.bank.oauth.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -23,6 +23,7 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Table(name = "USER_OAUTH")
 @Entity
 public class User {
 

@@ -17,7 +17,7 @@ import pl.training.bank.service.repository.AccountsRepository;
 @Import({Persistence.class,
         WebMvc.class,
         Security.class, MethodSecurityConfig.class,
-        SwaggerConfig.class})
+        OAuth2Config.class})
 @EnableAspectJAutoProxy
 @Configuration
 public class BeansConfig {
